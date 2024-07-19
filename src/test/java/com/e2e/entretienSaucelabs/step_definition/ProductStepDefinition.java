@@ -1,6 +1,6 @@
 package com.e2e.entretienSaucelabs.step_definition;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -20,6 +20,7 @@ public class ProductStepDefinition {
 	public ProductPage productPage;
 	public ConfigFileReader configFileReader;
 	public BasePage basepage;
+	public LoginPage loginPage;
 	public SeleniumUtils seleniumUtils;
 	public Validations validations;
 	private WebDriver driver = Setup.getDriver();
@@ -29,21 +30,56 @@ public class ProductStepDefinition {
 		configFileReader = new ConfigFileReader();
 		seleniumUtils = new SeleniumUtils();
 		validations = new Validations();
+		loginPage = new LoginPage();
 
 	}
+	
 
-	@Then("Je me rederige vers la page home")
-	public void jeMeRederigeVersLaPageHome() {
-		boolean isDisplayed = validations.isElementDisplayed(ProductPage.getElementVerif());
+//	@Then("Je me rederige vers la page home {string}")
+//	public void jeMeRederigeVersLaPageHome(String expectedURL) {
+//		validations.checkChangedURL(expectedURL);
+//	
+//	}
+	
+	@Then("Je me rederige vers la page home {string}")
+	public void jeMeRederigeVersLaPageHome(String expectedText) {
+		WebElement element = LoginPage.getTitlePage(); 
+        validations.assertEquals(element, expectedText);
+        System.out.println("The title of page is:" +expectedText);
 	}
+
+//
+//	@Then("Je me redirige vers la page home {string}")
+//	public void jeMeRedirigeVersLaPageHome(String expectedURL) {
+//		
+//		validations.checkChangedURL(expectedURL);
+//		
+////	String titlePage = LoginPage.getTitlePage().getText();
+////	Assert.assertEquals(titlePage, text);
+//	}
 
 	@When("Je clique sur le bouton Add to cart")
 	public void jeCliqueSurLeBoutonAddToCart() throws InterruptedException {
 		Thread.sleep(3000);
 
 		seleniumUtils.click(ProductPage.getBtnaddtocart());
+		
 
 	}
+	
+	
+	@When("Je verifie l'ajout du produit {string}")
+	public void jeVerifieLAjoutDuProduit(String expectedProduct) {
+		WebElement element = ProductPage.getproductName(); 
+        validations.assertEquals(element, expectedProduct);
+        System.out.println("The name of the product is:" +expectedProduct);
+	}
+
+
+
+
+
+
 
 	@When("je click sur le panier")
 	public void jeClickSurLePanier() {
@@ -79,6 +115,17 @@ public class ProductStepDefinition {
 	public void jeCliqueSurLeBoutonContinue() {
 		seleniumUtils.click(ProductPage.getbtnContinue());
 	}
+	
+	
+	@When("je verifie le prix de produit {string}")
+	public void jeVerifieLePrixDeProduit(String productPrice) {
+		
+		WebElement element = ProductPage.getproductPrice(); 
+        validations.assertEquals(element, productPrice);
+        System.out.println("The price of product is :" +productPrice);
+	   
+	}
+
 
 	@When("Je click sur le bouton finish")
 	public void jeClickSurLeBoutonFinish() {

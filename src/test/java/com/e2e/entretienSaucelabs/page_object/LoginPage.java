@@ -25,6 +25,8 @@ public class LoginPage extends BasePage {
 	@FindBy(how = How.XPATH, using = "//*[@id=\"header_container\"]/div[1]/div[2]/div")
 	private static WebElement text;
 	
+	
+	
 	public LoginPage() {
     	super(Setup.getDriver()); 
     }

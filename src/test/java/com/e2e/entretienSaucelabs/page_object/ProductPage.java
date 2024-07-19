@@ -59,6 +59,12 @@ public class ProductPage extends BasePage  {
 	@FindBy(how = How.XPATH, using = "/html/body/div/div/div/div[1]/div[1]/div[1]/div/div[2]/div[1]/nav/a[3]")
 	private static WebElement btnLogout;
 	
+	@FindBy(how = How.XPATH, using = "//*[@id=\"item_4_title_link\"]/div")
+	private static WebElement productName;
+	
+	@FindBy(how = How.XPATH, using = "//*[@id=\"checkout_summary_container\"]/div/div[1]/div[3]/div[2]/div[2]/div")
+	private static WebElement productPrice;
+	
 	public ProductPage() {
 
 		super(Setup.getDriver());
@@ -101,5 +107,10 @@ public class ProductPage extends BasePage  {
 		return btnLogout;
 	}
 	
-	
+	public static WebElement getproductName() {
+		return productName ;
+	}
+	public static WebElement getproductPrice() {
+		return productPrice ;
+	}
 }
